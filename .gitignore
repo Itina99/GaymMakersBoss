@@ -1,0 +1,17 @@
+# Dipendenze Node.js
+node_modules/
+
+# Segreti e variabili d'ambiente
+.env
+.env.*
+
+# Eccezione: mantieni eventuali template
+!.env.example
+
+# Log
+npm-debug.log*
+*.log
+
+# File del sistema e dell'editor
+.DS_Store
+.vscode/
