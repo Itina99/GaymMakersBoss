@@ -11,6 +11,13 @@ const {
 } = require('./database/database');
 
 const pingCommand = require('./commands/ping');
+const taskCreateCommand = require('./commands/task-create');
+const taskListCommand = require('./commands/task-list');
+const taskViewCommand = require('./commands/task-view');
+const taskEditCommand = require('./commands/task-edit');
+const taskDeleteCommand = require('./commands/task-delete');
+const taskStatusCommand = require('./commands/task-status');
+const reviewStatusCommand = require('./commands/review-status');
 
 const token = process.env.DISCORD_TOKEN?.trim();
 
@@ -32,6 +39,35 @@ client.commands = new Collection();
 client.commands.set(
     pingCommand.data.name,
     pingCommand
+);
+
+client.commands.set(
+    taskCreateCommand.data.name,
+    taskCreateCommand
+);
+client.commands.set(
+    taskListCommand.data.name,
+    taskListCommand
+);
+client.commands.set(
+    taskViewCommand.data.name,
+    taskViewCommand
+);
+client.commands.set(
+    taskEditCommand.data.name,
+    taskEditCommand
+);
+client.commands.set(
+    taskDeleteCommand.data.name,
+    taskDeleteCommand
+);
+client.commands.set(
+    taskStatusCommand.data.name,
+    taskStatusCommand
+);
+client.commands.set(
+    reviewStatusCommand.data.name,
+    reviewStatusCommand
 );
 
 client.on('interactionCreate', async (interaction) => {

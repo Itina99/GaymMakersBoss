@@ -27,6 +27,7 @@ async function initializeDatabase() {
             description TEXT NOT NULL,
             created_by TEXT NOT NULL,
             assignee_id TEXT,
+            role TEXT,
             priority TEXT NOT NULL DEFAULT 'Medium',
             work_status TEXT NOT NULL DEFAULT 'To do',
             review_status TEXT NOT NULL DEFAULT 'Finished',
@@ -34,6 +35,26 @@ async function initializeDatabase() {
             updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )
     `);
+    const tableInfo = db.exec(`
+    PRAGMA table_info(tasks)
+`);
+
+const columns = tableInfo.length > 0
+    ? tableInfo[0].values
+    : [];
+
+const hasRoleColumn = columns.some(
+    column => column[1] === 'role'
+);
+
+if (!hasRoleColumn) {
+    db.run(`
+        ALTER TABLE tasks
+        ADD COLUMN role TEXT
+    `);
+
+    console.log('Colonna role aggiunta alla tabella tasks.');
+}
 
     saveDatabase();
 
