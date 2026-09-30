@@ -13,6 +13,7 @@ const taskEditCommand = require('./commands/task-edit');
 const taskDeleteCommand = require('./commands/task-delete');
 const taskStatusCommand = require('./commands/task-status');
 const reviewStatusCommand = require('./commands/review-status');
+const automationSetCommand = require('./commands/automation-set');
 
 const commands = [
     pingCommand.data.toJSON(),
@@ -22,7 +23,8 @@ const commands = [
     taskEditCommand.data.toJSON(),
     taskDeleteCommand.data.toJSON(),
     taskStatusCommand.data.toJSON(),
-    reviewStatusCommand.data.toJSON()
+    reviewStatusCommand.data.toJSON(),
+    automationSetCommand.data.toJSON()
 ];
 
 const rest = new REST({

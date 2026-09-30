@@ -68,6 +68,20 @@ module.exports = {
                 )
         )
 
+        .addStringOption(option =>
+            option
+                .setName('ruolo')
+                .setDescription('Ruolo professionale richiesto')
+                .setRequired(false)
+                .addChoices(
+                    { name: 'Programmer', value: 'Programmer' },
+                    { name: 'Designer', value: 'Designer' },
+                    { name: 'Manager', value: 'Manager' },
+                    { name: 'Artist', value: 'Artist' },
+                    { name: 'Sound', value: 'Sound' }
+                )
+        )
+
         .addUserOption(option =>
             option
                 .setName('assegnatario')
@@ -84,6 +98,7 @@ module.exports = {
         const workStatus = interaction.options.getString('stato');
         const reviewStatus = interaction.options.getString('revisione');
         const assignee = interaction.options.getUser('assegnatario');
+        const role = interaction.options.getString('ruolo');
 
         const db = getDatabase();
 
@@ -136,6 +151,11 @@ module.exports = {
         if (assignee !== null) {
             updates.push('assignee_id = ?');
             values.push(assignee.id);
+        }
+
+        if (role !== null) {
+            updates.push('role = ?');
+            values.push(role);
         }
 
         if (updates.length === 0) {
